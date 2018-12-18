@@ -38,7 +38,7 @@ http {
     port_in_redirect off;
     keepalive_timeout 5;
     root public_html/;
-
+    rewrite ^/(.*)/$ /$1 permanent;
 
     resolver 172.16.0.23 8.8.8.8;
 
