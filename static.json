@@ -1,4 +1,5 @@
 {
+  "https_only": true,
   "proxies": {
     "/": {
       "origin": "${MADETECH_URL}"
