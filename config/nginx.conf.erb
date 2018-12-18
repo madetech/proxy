@@ -38,7 +38,6 @@ http {
     port_in_redirect off;
     keepalive_timeout 5;
     root public_html/;
-    rewrite ^/(.*)/$ /$1 permanent;
 
     resolver 172.16.0.23 8.8.8.8;
 
@@ -80,9 +79,9 @@ http {
       proxy_pass $upstream_endpoint_1;
       proxy_ssl_server_name on;
 
-      proxy_redirect http://blog.madetech.com/blog/ /blog/;
+      proxy_redirect http://blog.madetech.com/blog /blog;
 
-      proxy_redirect https://blog.madetech.com/blog/ /blog/;
+      proxy_redirect https://blog.madetech.com/blog /blog;
 
     }
   }
