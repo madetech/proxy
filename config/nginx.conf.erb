@@ -61,7 +61,7 @@ http {
   # fallback proxy named match
 
     set $upstream_endpoint_0 https://www.madetech.com;
-    location @/ {
+    location / {
       rewrite ^//?(.*)$ /$1 break;
       # can reuse variable set above
       proxy_pass $upstream_endpoint_0;
@@ -74,7 +74,7 @@ http {
     }
 
     set $upstream_endpoint_1 https://blog.madetech.com;
-    location @/blog {
+    location /blog {
       rewrite ^/blog/?(.*)$ /blog/$1 break;
       # can reuse variable set above
       proxy_pass $upstream_endpoint_1;
@@ -85,10 +85,5 @@ http {
       proxy_redirect https://blog.madetech.com/blog/ /blog;
 
     }
-
-
-  # fallback redirects named match
-
-
   }
 }
