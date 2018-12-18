@@ -1,0 +1,10 @@
+{
+  "proxies": {
+    "/": {
+      "origin": "${MADETECH_URL}"
+    },
+    "/blog": {
+      "origin": "${MADETECH_BLOG_URL}"
+    }
+  }
+}
