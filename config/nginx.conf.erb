@@ -75,14 +75,14 @@ http {
 
     set $upstream_endpoint_1 https://blog.madetech.com;
     location /blog {
-      rewrite ^/blog/?(.*)$ /blog/$1 break;
+      # rewrite ^/blog/?(.*)$ /blog/$1 break;
       # can reuse variable set above
       proxy_pass $upstream_endpoint_1;
       proxy_ssl_server_name on;
 
-      proxy_redirect http://blog.madetech.com/blog/ /blog;
+      proxy_redirect http://blog.madetech.com/blog/ /blog/;
 
-      proxy_redirect https://blog.madetech.com/blog/ /blog;
+      proxy_redirect https://blog.madetech.com/blog/ /blog/;
 
     }
   }
