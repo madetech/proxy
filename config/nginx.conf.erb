@@ -45,18 +45,16 @@ http {
       return 404;
     }
 
-    set $madetech_url <%= ENV['MADETECH_URL'] %>;
-    location / {
-      proxy_pass $madetech_url;
+    location <%= ENV['MADETECH_PATH'] %> {
+      proxy_pass <%= ENV['MADETECH_URL'] %>;
       proxy_ssl_server_name on;
-      proxy_redirect $madetech_url /;
+      proxy_redirect <%= ENV['MADETECH_URL'] %> <%= ENV['MADETECH_PATH'] %>;
     }
 
-    set $madetech_blog_url <%= ENV['MADETECH_BLOG_URL'] %>;
-    location /blog {
-      proxy_pass $madetech_blog_url;
+    location <%= ENV['MADETECH_BLOG_PATH'] %> {
+      proxy_pass <%= ENV['MADETECH_BLOG_URL'] %>;
       proxy_ssl_server_name on;
-      proxy_redirect $madetech_blog_url /blog;
+      proxy_redirect <%= ENV['MADETECH_BLOG_URL'] %> <%= ENV['MADETECH_BLOG_PATH'] %>;
     }
   }
 }
