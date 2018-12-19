@@ -53,7 +53,7 @@ http {
     }
 
     location <%= ENV['MADETECH_BLOG_PATH'] %> {
-      proxy_pass https://<%= ENV['MADETECH_BLOG_HOST'] %><%= ENV['MADETECH_BLOG_PATH'] %>/;
+      proxy_pass https://<%= ENV['MADETECH_BLOG_HOST'] %><%= ENV['MADETECH_BLOG_PATH'] %>;
       proxy_ssl_server_name on;
       proxy_redirect http://<%= ENV['MADETECH_BLOG_HOST'] %><%= ENV['MADETECH_BLOG_PATH'] %> <%= ENV['MADETECH_BLOG_PATH'] %>;
       proxy_redirect https://<%= ENV['MADETECH_BLOG_HOST'] %><%= ENV['MADETECH_BLOG_PATH'] %> <%= ENV['MADETECH_BLOG_PATH'] %>;
