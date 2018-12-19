@@ -17,13 +17,8 @@ http {
 
   server_tokens off;
 
-
   access_log logs/access.log;
-
-
-
   error_log stderr error;
-
 
   include mime.types;
   default_type application/octet-stream;
@@ -41,48 +36,27 @@ http {
 
     resolver 172.16.0.23 8.8.8.8;
 
-
-
-
-
     if ($http_x_forwarded_proto != "https") {
       return 301 https://$host$request_uri;
     }
 
-
-
-
-  # need this b/c setting $fallback to =404 will try #{root}=404 instead of returning a 404
-  location @404 {
-    return 404;
-  }
-
-  # fallback proxy named match
-
-    set $upstream_endpoint_0 https://www.madetech.com;
-    location / {
-      rewrite ^//?(.*)$ /$1 break;
-      # can reuse variable set above
-      proxy_pass $upstream_endpoint_0;
-      proxy_ssl_server_name on;
-
-      proxy_redirect http://www.madetech.com/ /;
-
-      proxy_redirect https://www.madetech.com/ /;
-
+    # need this b/c setting $fallback to =404 will try #{root}=404 instead of returning a 404
+    location @404 {
+      return 404;
     }
 
-    set $upstream_endpoint_1 https://blog.madetech.com;
-    location /blog {
-      # rewrite ^/blog/?(.*)$ /blog/$1 break;
-      # can reuse variable set above
-      proxy_pass $upstream_endpoint_1;
+    set $madetech_url <%= ENV['MADETECH_URL'] %>;
+    location / {
+      proxy_pass $madetech_url;
       proxy_ssl_server_name on;
+      proxy_redirect $madetech_url /;
+    }
 
-      proxy_redirect http://blog.madetech.com/blog /blog;
-
-      proxy_redirect https://blog.madetech.com/blog /blog;
-
+    set $madetech_blog_url <%= ENV['MADETECH_BLOG_URL'] %>;
+    location /blog {
+      proxy_pass $madetech_blog_url;
+      proxy_ssl_server_name on;
+      proxy_redirect $madetech_blog_url /blog;
     }
   }
 }
