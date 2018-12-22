@@ -28,8 +28,7 @@ http {
   client_body_timeout 5;
 
   server {
-    listen      <%= ENV['PORT'] %> reuseport;
-
+    listen <%= ENV['PORT'] %> reuseport;
     charset UTF-8;
     port_in_redirect off;
     keepalive_timeout 5;
