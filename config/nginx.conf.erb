@@ -29,7 +29,6 @@ http {
 
   server {
     listen      <%= ENV['PORT'] %> reuseport;
-    server_name <%= ENV['MADETECH_PROXY_HOST'] %>;
 
     charset UTF-8;
     port_in_redirect off;
