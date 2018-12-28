@@ -36,9 +36,15 @@ http {
 
     resolver 172.16.0.23 8.8.8.8;
 
-    location <%= ENV['MADETECH_PATH'] %> {
-      proxy_pass https://<%= ENV['MADETECH_HOST'] %><%= ENV['MADETECH_PATH'] %>;
+    location / {
+      try_files $uri @madetech;
+    }
+
+    location @madetech {
+      proxy_pass https://<%= ENV['MADETECH_HOST'] %>;
       proxy_ssl_server_name on;
+
+      # Capture redirects for both http and https and map to proxy host
       proxy_redirect http://<%= ENV['MADETECH_HOST'] %><%= ENV['MADETECH_PATH'] %> <%= ENV['MADETECH_PATH'] %>;
       proxy_redirect https://<%= ENV['MADETECH_HOST'] %><%= ENV['MADETECH_PATH'] %> <%= ENV['MADETECH_PATH'] %>;
     }
@@ -46,6 +52,12 @@ http {
     location <%= ENV['MADETECH_BLOG_PATH'] %> {
       proxy_pass https://<%= ENV['MADETECH_BLOG_HOST'] %><%= ENV['MADETECH_BLOG_PATH'] %>;
       proxy_ssl_server_name on;
+
+      # Let @madetech handle 404
+      proxy_intercept_errors on;
+      error_page 404 = @madetech;
+
+      # Capture redirects for both http and https and map to proxy host
       proxy_redirect http://<%= ENV['MADETECH_BLOG_HOST'] %><%= ENV['MADETECH_BLOG_PATH'] %> <%= ENV['MADETECH_BLOG_PATH'] %>;
       proxy_redirect https://<%= ENV['MADETECH_BLOG_HOST'] %><%= ENV['MADETECH_BLOG_PATH'] %> <%= ENV['MADETECH_BLOG_PATH'] %>;
     }
