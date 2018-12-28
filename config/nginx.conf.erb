@@ -61,5 +61,11 @@ http {
       proxy_redirect http://<%= ENV['MADETECH_BLOG_HOST'] %><%= ENV['MADETECH_BLOG_PATH'] %> <%= ENV['MADETECH_BLOG_PATH'] %>;
       proxy_redirect https://<%= ENV['MADETECH_BLOG_HOST'] %><%= ENV['MADETECH_BLOG_PATH'] %> <%= ENV['MADETECH_BLOG_PATH'] %>;
     }
+
+    # Redirects
+
+    location /blog/t/extreme-programming-xp {
+      return 301 https://$host/blog/t/extreme-programming;
+    }
   }
 }
