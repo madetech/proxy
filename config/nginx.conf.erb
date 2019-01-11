@@ -62,8 +62,8 @@ http {
       proxy_redirect https://<%= ENV['MADETECH_BLOG_HOST'] %><%= ENV['MADETECH_BLOG_PATH'] %> <%= ENV['MADETECH_BLOG_PATH'] %>;
     }
 
-    location <%= ENV['MADETECH_CAREERS_PATH'] %> {
-      proxy_pass https://<%= ENV['MADETECH_CAREERS_HOST'] %><%= ENV['MADETECH_CAREERS_PATH'] %>;
+    location <%= ENV['MADETECH_PLAYGROUND_PATH'] %> {
+      proxy_pass https://<%= ENV['MADETECH_PLAYGROUND_HOST'] %><%= ENV['MADETECH_PLAYGROUND_PATH'] %>;
       proxy_ssl_server_name on;
 
       # Let @madetech handle 404
@@ -71,8 +71,8 @@ http {
       error_page 404 = /404;
 
       # Capture redirects for both http and https and map to proxy host
-      proxy_redirect http://<%= ENV['MADETECH_CAREERS_HOST'] %><%= ENV['MADETECH_CAREERS_PATH'] %> <%= ENV['MADETECH_CAREERS_PATH'] %>;
-      proxy_redirect https://<%= ENV['MADETECH_CAREERS_HOST'] %><%= ENV['MADETECH_CAREERS_PATH'] %> <%= ENV['MADETECH_CAREERS_PATH'] %>;
+      proxy_redirect http://<%= ENV['MADETECH_PLAYGROUND_HOST'] %><%= ENV['MADETECH_PLAYGROUND_PATH'] %> <%= ENV['MADETECH_PLAYGROUND_PATH'] %>;
+      proxy_redirect https://<%= ENV['MADETECH_PLAYGROUND_HOST'] %><%= ENV['MADETECH_PLAYGROUND_PATH'] %> <%= ENV['MADETECH_PLAYGROUND_PATH'] %>;
     }
   }
 }
