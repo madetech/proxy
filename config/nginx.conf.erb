@@ -46,7 +46,6 @@ http {
 
       # Let @madetech handle 404
       proxy_intercept_errors on;
-	    recursive_error_pages on;
       error_page 404 = @madetech;
 
       # Capture redirects for both http and https and map to proxy host
