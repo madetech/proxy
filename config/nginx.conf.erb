@@ -46,7 +46,7 @@ http {
 
       # Let @madetech handle 404
       proxy_intercept_errors on;
-      error_page 404 = @madetech;
+      error_page 403 404 = @madetech;
 
       # Capture redirects for both http and https and map to proxy host
       proxy_redirect http://<%= ENV['MADETECH_BLOG_HOST'] %>/ /;
