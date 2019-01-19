@@ -43,7 +43,6 @@ http {
     location @madetech_blog {
       proxy_pass https://<%= ENV['MADETECH_BLOG_HOST'] %>;
       proxy_ssl_server_name on;
-      proxy_set_header Authorization '';
 
       # Let @madetech handle 404
       proxy_intercept_errors on;
